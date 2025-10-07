@@ -1,4 +1,4 @@
-  VANTA.GLOBE({
+ VANTA.GLOBE({
             el: "#vanta-globe",
             mouseControls: true,
             touchControls: true,
@@ -74,3 +74,37 @@
                 });
             });
         });
+
+         document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent page reload
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+       const service = document.getElementById('service').value;
+
+      if (!name || !email || !message || !service) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Send email using EmailJS
+      emailjs.send(
+        "service_yyysajp",     // ← REPLACE WITH YOUR SERVICE ID
+        "template_k9qw7w7",    // ← REPLACE WITH YOUR TEMPLATE ID
+        {
+          from_name: name,
+          reply_to: email,
+          service: service,
+          message: message
+
+        }
+      )
+      .then(function(response) {
+        alert('✅ Thank you! Your message was sent successfully.');
+        document.getElementById('contact-form').reset();
+      }, function(error) {
+        alert('❌ Failed to send. Please try again or contact us directly.');
+        console.log('FAILED...', error);
+      });
+    });

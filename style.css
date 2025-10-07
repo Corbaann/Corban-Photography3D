@@ -21,3 +21,8 @@
             z-index: 9999;
             mix-blend-mode: overlay;
         }
+        #view {
+background-color: aqua;
+border-radius: 50%;
+
+        }
